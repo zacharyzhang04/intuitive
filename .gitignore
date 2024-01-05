@@ -1,4 +1,4 @@
-./backend/privatekey.json
+backend/privatekey.json
 
 ./frontend/config/authconfig.js
 ./frontend/node_modules
