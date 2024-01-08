@@ -27,16 +27,12 @@ def create_procedure():
         procedure_data = data.get('procedureData')
         json_string = procedure_data.replace("'", "\"")
         data_dict = json.loads(json_string)
-        print(data_dict)
         entry_data = data_dict['procedureData']
         entry_data['User'] = db.collection('users').document(data_dict['userEmail'])
         
         procedure_id = entry_data['procedureId']
         procedure_ref = db.collection('procedures').document(procedure_id)
         procedure_ref.set(entry_data)
-        
-        print(procedure_id)
-
 
         # upload the video
         if 'video' in request.files:
