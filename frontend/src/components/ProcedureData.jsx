@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { default as address }  from '../config/serverconfig'
 
 const ProcedureDetails = ({ procedureId }) => {
   const [procedureData, setProcedureData] = useState(null);
@@ -9,7 +10,7 @@ const ProcedureDetails = ({ procedureId }) => {
     if (!procedureId) return;
     const fetchProcedureData = async () => {
       try {
-        const response = await fetch(`http://localhost:5002/procedures/${procedureId}`);
+        const response = await fetch(`${address}/procedures/${procedureId}`);
         if (response.ok) {
           const data = await response.json();
           setProcedureData(data);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { default as address }  from '../config/serverconfig'
 
 const ProcedureVideo = ({ procedureId }) => {
   const [videoUrl, setVideoUrl] = useState(null);
@@ -12,7 +13,7 @@ const ProcedureVideo = ({ procedureId }) => {
 
     const fetchVideoUrl = async () => {
       try {
-        const response = await fetch(`http://localhost:5002/procedure/${procedureId}/video`);
+        const response = await fetch(`${address}/procedure/${procedureId}/video`);
         
         if (response.ok) {
           const data = await response.json();

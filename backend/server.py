@@ -18,7 +18,7 @@ db = firestore.client()
 app = Flask(__name__)
 CORS(app)
 
-# CREATE PROCEDURE
+# CREATE PROCEDURE (C)
 @app.route('/procedure', methods=['POST'])
 def create_procedure():
     try:
@@ -58,7 +58,7 @@ def create_procedure():
         print('Error creating procedure:', str(e))
         return jsonify({'error': 'Internal server error'}), 500
 
-# GET ALL PROCEDURES
+# GET ALL PROCEDURES (R)
 @app.route('/procedures', methods=['GET'])
 def get_all_procedures():
     try:
@@ -81,7 +81,7 @@ def get_all_procedures():
         return jsonify({'error': 'Internal server error'}), 500
 
 
-# GETS SPECIFIC PROCEDURE DATA
+# GETS SPECIFIC PROCEDURE DATA and allow user to update data (R)
 @app.route('/procedures/<procedure_id>', methods=['GET'])
 def get_procedure(procedure_id):
     try:
@@ -116,7 +116,10 @@ def get_procedure(procedure_id):
         return jsonify({'error': 'Internal server error'}), 500
 
 
-# ADD TASK
+
+
+
+# ADD TASK (C (for task), U (for procedure))
 @app.route('/tasks', methods=['POST'])
 def add_task():
     try:
@@ -161,7 +164,7 @@ def add_task():
 
 
 
-# GET USER INFO THROUGH EMAIL
+# GET USER INFO THROUGH EMAIL (R)
 @app.route('/user/<email>', methods=['GET'])
 def get_user_data(email):
     try:
@@ -176,7 +179,7 @@ def get_user_data(email):
         print('Error fetching user data:', str(e))
         return jsonify({'error': 'Internal server error'}), 500
 
-# CREATE NEW USER / UPDATE CURRENT USER
+# CREATE NEW USER / UPDATE CURRENT USER (C/U)
 @app.route('/user', methods=['POST'])
 def add_or_update_user():
     try:
@@ -197,7 +200,7 @@ def add_or_update_user():
         return jsonify({'error': 'Internal server error'}), 500
 
 
-# GET PROCEDURE VIDEO
+# GET PROCEDURE VIDEO (R)
 @app.route('/procedure/<procedure_id>/video', methods=['GET'])
 def get_procedure_video(procedure_id):
     try:
@@ -212,6 +215,11 @@ def get_procedure_video(procedure_id):
     except Exception as e:
         print('Error fetching video:', str(e))
         return jsonify({'error': 'Internal server error'}), 500
+
+
+# TODO:
+# update procedures, update tasks, delete procedures, delete tasks
+# right now only CRU but no D
 
 
 

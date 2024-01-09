@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-
+import { default as address }  from '../config/serverconfig'
 
 const CreateProcedureForm = () => {
   const [procedureName, setProcedureName] = useState('');
@@ -42,7 +42,7 @@ const CreateProcedureForm = () => {
     
     try {
       // post request to flask server
-      const response = await fetch('http://localhost:5002/procedure', {
+      const response = await fetch((address + '/procedure'), {
         method: 'POST',
         body: formData,
       });

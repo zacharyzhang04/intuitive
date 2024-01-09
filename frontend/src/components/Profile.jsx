@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
+import { default as address }  from '../config/serverconfig'
+
 const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
   const [userData, setUserData] = useState(null);
@@ -18,7 +20,7 @@ const Profile = () => {
     
         try {
           // get the user data based on email
-          const response = await fetch(`http://localhost:5002/user/${userEmail}`);
+          const response = await fetch(`${address}/user/${userEmail}`);
           
           if (response.ok) {
             const data = await response.json();
@@ -50,7 +52,7 @@ const Profile = () => {
       firstName, lastName, hospital
     };
     try {
-      const response = await fetch('http://localhost:5002/user', {
+      const response = await fetch(address + '/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProcedureDetails from './ProcedureData';
 import ProcedureVideo from './Video';
+import { default as address }  from '../config/serverconfig'
 
 const FindProcedure = () => {
   const [procedureIds, setProcedureIds] = useState([]);
@@ -22,7 +23,7 @@ const FindProcedure = () => {
   useEffect(() => {
     const fetchProcedureIds = async () => {
       try {
-        const response = await fetch('http://localhost:5002/procedures');
+        const response = await fetch(address + '/procedures');
         if (response.ok) {
           const data = await response.json();
           setProcedureIds(data.procedureIds);
@@ -50,7 +51,7 @@ const FindProcedure = () => {
     };
   
     try {
-      const response = await fetch(`http://localhost:5002/tasks`, {
+      const response = await fetch(`${address}/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
